@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    About Us
+{% endblock title %}
+
+{% block main %}
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="bg-white shadow-sm p-4 p-md-5 rounded-4">
+            <h2 class="fw-bold text-primary mb-3">📘 About the Student Leave System</h2>
+            <p class="text-muted mb-4">
+                The <strong>Student Leave Application System</strong> is a streamlined platform designed to simplify the process of submitting, reviewing, and managing student leave requests. 
+                Whether it's for medical reasons, family emergencies, or personal matters, students can quickly submit their leave requests online without the need for physical paperwork.
+            </p>
+
+            <h4 class="fw-semibold text-dark mb-2">🎯 Key Features:</h4>
+            <ul class="text-muted mb-4">
+                <li>📝 Simple and intuitive leave request form</li>
+                <li>📅 Customizable leave start and end dates</li>
+                <li>🗂️ Faculty & semester-wise tracking</li>
+                <li>🔒 Soft delete with Recycle Bin support</li>
+                <li>📧 Email and contact record keeping</li>
+                <li>🔍 Easy data viewing, editing, and filtering</li>
+            </ul>
+
+            <h4 class="fw-semibold text-dark mb-2">💡 Why Use This System?</h4>
+            <p class="text-muted mb-4">
+                This system eliminates delays, reduces paper usage, and provides a centralized dashboard for both students and administrators to manage leave efficiently. 
+                It supports academic institutions in tracking attendance-related data and ensures transparent communication between students and the faculty.
+            </p>
+
+            <h4 class="fw-semibold text-dark mb-2">👨‍💻 Developed By:</h4>
+            <p class="text-muted mb-0">
+                This system was built using Django and Bootstrap with a focus on simplicity, accessibility, and performance. Designed for educational institutions that value time, structure, and clarity.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock main %}

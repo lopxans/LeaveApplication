@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    Recycle Bin
+{% endblock title %}
+
+{% block main %}
+<section class="py-5" style="background-color: #f0f2f5;">
+    <div class="container">
+
+        <!-- Section Header -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+            <div>
+                <h2 class="fw-bold text-primary mb-1">🗑️ Recycle Bin</h2>
+                <p class="text-muted mb-0">List of leave applications that have been soft-deleted. You may choose to restore or permanently remove them.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="{% url 'restore_all' %}" class="btn btn-outline-secondary">
+                    ♻️ Restore all
+                </a>
+                <a href="{% url 'clear_all' %}" class="btn btn-outline-danger">
+                    <i class="fa-solid fa-delete-left"></i> Clear All
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive shadow-sm rounded-4 bg-white">
+            <table class="table table-bordered table-striped table-hover align-middle mb-0">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>👤 Name</th>
+                        <th>🎓 Faculty</th>
+                        <th>📚 Semester</th>
+                        <th>📝 Reason</th>
+                        <th>📅 Start Date</th>
+                        <th>📅 End Date</th>
+                        <th>⚙️ Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td>{{ student.full_name }}</td>
+                        <td>{{ student.faculty }}</td>
+                        <td>{{ student.semester }}</td>
+                        <td>{{ student.reason }}</td>
+                        <td>{{ student.start_date }}</td>
+                        <td>{{ student.end_date }}</td>
+                        <td class="text-center text-nowrap">
+                            <a href="{% url 'restore' student.id %}" class="btn btn-sm btn-outline-primary me-2">
+                                ♻️ Restore
+                            </a>
+                            <a href="{% url 'delete_hard' student.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash me-1"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            🛈 No leave forms have been deleted yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- BACK TO contact view BUTTON -->
+        <div class="text-center mt-5">
+            <a href="{% url 'home' %}" class="btn btn-outline-dark">
+                ⬅️ Back to contact view
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endblock main %}

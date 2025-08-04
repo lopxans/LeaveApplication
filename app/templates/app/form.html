@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    Leave Form
+{% endblock title %}
+
+{% block main %}
+<!-- Font Awesome CDN (if not already in layout.html) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<section class="py-5" style="background-color: #f0f2f5;">
+    <div class="container">
+        <div class="bg-white p-4 p-md-5 shadow-sm rounded-4">
+            <h2 class="mb-3 text-primary">📝 Student Leave Application</h2>
+            <p class="mb-4 text-muted">
+                Fill out the form below to submit a leave request due to valid reasons such as illness, family emergency, or personal matters.
+            </p>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">🎫 Roll Number</label>
+                        <input type="number" name="roll_number" value="{{students.roll_number}}" class="form-control" required maxlength="6" min="6">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">👤 Full Name</label>
+                        <input type="text" name="full_name" value="{{students.full_name}}" placeholder="Enter full name" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">🏛️ Faculty</label>
+                        <select name="faculty" class="form-select" required>
+                            <option value="" disabled {% if not students.faculty %} selected {% endif %}>Select Faculty</option>
+                            <option value="Computer Enginering" {% if data.faculty == 'Computer Enginering' %} selected {% endif %}>Computer Engineering</option>
+                            <option value="Architecture" {% if data.faculty == 'Architecture' %} selected {% endif %}>Architecture</option>
+                            <option value="Electrical Engineering" {% if data.faculty == 'Electrical Engineering' %} selected {% endif %}>Electrical Engineering</option>
+                            <option value="Electronic Engineering" {% if data.faculty == 'Electronic Engineering' %} selected {% endif %}>Electronic Engineering</option>
+                            <option value="Civil Engineering" {% if data.faculty == 'Civil Engineering' %} selected {% endif %}>Civil Engineering</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">📚 Semester</label>
+                        <input type="number" value="{{students.semester}}" name="semester" class="form-control" placeholder="Enter semester" required min="1" max="10">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">📝 Reason for Leave</label>
+                        <textarea name="reason" class="form-control" rows="3" placeholder="State your reason here..." required>{{students.reason}}</textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">📅 Leave Start Date</label>
+                        <input type="date" value="{{students.start_date|date:'Y-m-d'}}" name="start_date" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">📅 Leave End Date</label>
+                        <input type="date" value="{{students.end_date|date:'Y-m-d'}}" name="end_date" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">🗂️ Type of Leave</label>
+                        <select name="leave_type" class="form-select" required>
+                            <option value="" disabled {% if not students.leave_type %} selected {% endif %}>Select Type of Leave</option>
+                            <option value="Medical Leave" {% if data.faculty == 'Medical Leave' %} selected {% endif %}>Medical Leave</option>
+                            <option value="Personal Leave" {% if data.faculty == 'Personal Leave' %} selected {% endif %}>Personal Leave</option>
+                            <option value="Other..." {% if data.faculty == 'Other...' %} selected {% endif %}>Other...</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">📞 Parent/Guardian Contact</label>
+                        <input type="text" value="{{students.guardian_contact}}" name="guardian_contact" class="form-control" placeholder="Enter contact number" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">📱 Student Contact</label>
+                        <input type="text" value="{{students.student_contact}}" name="student_contact" class="form-control" placeholder="Enter contact number" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">📧 Email Address</label>
+                        <input type="email" value="{{students.student_email}}" name="student_email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+
+                </div>
+
+                <!-- Submit & Back Buttons Row -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary w-100 py-2">
+                            <i class="fas fa-paper-plane me-2"></i> Submit Application
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary w-100 py-2">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Home
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock main %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    Contact Us
+{% endblock title %}
+
+{% block main %}
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="bg-white shadow-sm p-4 p-md-5 rounded-4">
+            <h2 class="fw-bold text-primary mb-3">📞 Contact Us</h2>
+            <p class="text-muted mb-4">
+                Have questions, feedback, or suggestions? Reach out to us using the form below. We’ll get back to you as soon as possible.
+            </p>
+
+            <div>
+                <form action="{% url 'contact' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        {{ contact.name.label_tag }}
+                        {{ contact.name }}
+                        {{ contact.name.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ contact.email.label_tag }}
+                        {{ contact.email }}
+                        {{ contact.email.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ contact.number.label_tag }}
+                        {{ contact.number }}
+                        {{ contact.number.errors }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ contact.message.label_tag }}
+                        {{ contact.message }}
+                        {{ contact.message.errors }}
+                    </div>
+                    <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button type="submit" class="btn btn-primary">
+                            📨 Send your details
+                        </button>
+                        
+                        {% if data %}
+                         <a href="{% url 'view_contact' %}" class="btn btn-outline-secondary">📇 View Contact</a>
+                        {% endif %}      
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}
